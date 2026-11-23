@@ -1,91 +1,21 @@
+/* ROOMS AND AMENITIES PAGE (extras on top of Design.css) */
 
-/* ROOMS AND AMENITIES PAGE */
-
-.section {
-    padding: 60px 8%;
-    text-align: center;
+/* Price line under each room description */
+.card h3 + p + h3 {
+    margin-top: 10px;
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--sage);
 }
 
-.section h1 {
-    color: #31543C;
-    font-size: 36px;
-    margin-bottom: 10px;
-}
-
-.section h2 {
-    color: #31543C;
-    font-size: 30px;
-    margin-bottom: 20px;
-}
-
-.section > p {
-    color: #667566;
-    margin-bottom: 30px;
-}
-
-/* ROOM CARDS */
-
-.card-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 25px;
-    margin-top: 30px;
-}
-
-.card {
-    background-color: #FFFFFF;
-    width: 280px;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    transition: 0.3s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.card img {
-    width: 100%;
-    height: 190px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-.card h3 {
-    color: #31543C;
-    margin: 12px 0;
-}
-
-.card p {
-    color: #667566;
-}
-
-/* BOOK NOW BUTTON */
-
-.btn {
-    display: inline-block;
-    background-color: #315C3B;
-    color: white;
-    text-decoration: none;
-    padding: 12px 25px;
-    border-radius: 7px;
-    margin-top: 15px;
-}
-
-.btn:hover {
-    background-color: #49794F;
-}
-
-/* RESPONSIVE DESIGN */
-
-@media (max-width: 768px) {
-    .card {
-        width: 100%;
-    }
-
-    .section {
-        padding: 40px 5%;
-    }
+/* Amenity tiles (cards that only contain text) */
+.card-container .card:not(:has(img)) {
+    display: grid;
+    place-items: center;
+    width: 200px;
+    min-height: 90px;
+    padding: 18px;
+    font-weight: 700;
+    background: var(--mist);
 }

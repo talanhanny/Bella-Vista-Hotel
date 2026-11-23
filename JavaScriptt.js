@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function () {
 
     // =====================================
@@ -30,6 +29,19 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
         });
+
+        // Pre-fill the booking form with dates sent from the homepage bar
+        // (only on pages that have the full booking form)
+
+        const params = new URLSearchParams(window.location.search);
+        const guestsField = document.querySelector('form[action="booking_process.php"] input[name="guests"]');
+
+        if (guestsField && params.has("check_in")) {
+            checkIn.value = params.get("check_in");
+            checkOut.min = checkIn.value;
+            checkOut.value = params.get("check_out") || "";
+            guestsField.value = params.get("guests") || "";
+        }
 
     }
 
@@ -90,9 +102,45 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // =====================================
-    // 3. WELCOME MESSAGE
+    // 3. GALLERY: DESCRIPTION ON HOVER
     // =====================================
 
-    console.log("Welcome to Modern Kubo!");
+    const galleryDescriptions = {
+        "hotel exterior": "Our Filipino-inspired building, set among gardens at the foothills of the mountains.",
+        "reception area": "Check in with a warm welcome from our front desk team.",
+        "lounge area": "A comfortable indoor space to relax, read, or catch up with family and friends.",
+        "buffet area": "An open, airy dining space with a buffet spread for guests and groups.",
+        "function area": "A flexible space for celebrations, family gatherings, and company events.",
+        "swimming pool area": "Cool off in the pool, surrounded by greenery and mountain views.",
+        "swimming pool": "Cool off in the pool, surrounded by greenery and mountain views.",
+        "gym": "Keep up your routine with cardio equipment in a bright, open room.",
+        "parking area": "Convenient on-site parking for hotel guests and event visitors.",
+        "comfortable rooms": "Warm, well-kept rooms with everything you need to rest properly.",
+        "restaurant": "Hearty meals served in a relaxed setting, right on the property."
+    };
+
+    document.querySelectorAll(".gallery-item").forEach(function (item) {
+
+        const title = item.querySelector("h3");
+        if (!title) return;
+
+        const text = galleryDescriptions[title.textContent.trim().toLowerCase()];
+        if (!text) return;
+
+        const desc = document.createElement("p");
+        desc.className = "gallery-desc";
+        desc.textContent = text;
+
+        item.appendChild(desc);
+        item.setAttribute("tabindex", "0");   // lets keyboard users see it too
+
+    });
+
+
+    // =====================================
+    // 4. WELCOME MESSAGE
+    // =====================================
+
+    console.log("Welcome to Bella Vista!");
 
 });

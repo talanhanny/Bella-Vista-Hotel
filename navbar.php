@@ -19,6 +19,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <?php else: ?>
             <a href="login.php">Login</a>
         <?php endif; ?>
+        <a href="booking.php" class="nav-cta">Book now</a>
     </nav>
 
 </header>

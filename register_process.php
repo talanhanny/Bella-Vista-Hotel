@@ -2,6 +2,8 @@
 
 session_start();
 
+include __DIR__ . "/database.php";
+
 
 // Only accept POST requests
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
