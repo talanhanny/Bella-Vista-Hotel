@@ -1,21 +1,70 @@
-/* ROOMS AND AMENITIES PAGE (extras on top of Design.css) */
-
-/* Price line under each room description */
-.card h3 + p + h3 {
-    margin-top: 10px;
-    font-family: var(--font-body);
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--sage);
+/* Make the container as wide as the navbar */
+.gallery-container {
+    max-width: 1100px !important;
+    width: 96% !important;
+    margin: 0 auto;
+    display: flex !important;
+    flex-direction: column;
+    gap: 28px;
+}
+/* Wider cards with less side padding */
+.room-card {
+    width: 100% !important;
+    max-width: none !important;
+    padding: 16px 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+.room-card {
+    text-align: left;
 }
 
-/* Amenity tiles (cards that only contain text) */
-.card-container .card:not(:has(img)) {
+.room-capacity {
+    display: inline-block;
+    font-size: 2.1rem;
+    padding: 4px 14px;
+    border-radius: 30px;
+    background: #eef6f0;
+    color: #2d6a4f;
+    margin-bottom: 8px;
+}
+
+.room-desc {
+    font-size: 1.6rem;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.room-lists {
     display: grid;
-    place-items: center;
-    width: 200px;
-    min-height: 90px;
-    padding: 18px;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+.room-lists h4 {
+    margin: 0 0 6px;
+    font-size: 0.95rem;
+}
+
+.room-lists ul {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 1.4rem;
+    line-height: 1.8;
+}
+
+@media (max-width: 600px) {
+    .room-lists {
+        grid-template-columns: 1fr;
+    }
+}
+
+.room-price {
+    margin: 12px 0 4px;
+    font-family: var(--font-body);
+    font-size: 1.4rem;
     font-weight: 700;
-    background: var(--mist);
+    color: var(--forest);
 }

@@ -64,6 +64,9 @@ CREATE TABLE `reservations` (
   `check_out` date NOT NULL,
   `guests` int(11) NOT NULL,
   `total_amount` decimal(10,2) NOT NULL,
+  `extra_fee_total` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `downpayment` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `balance` decimal(10,2) NOT NULL DEFAULT 0.00,
   `status` varchar(30) DEFAULT 'Pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -71,8 +74,8 @@ CREATE TABLE `reservations` (
 -- Dumping data for table `reservations`
 --
 
-INSERT INTO `reservations` (`reservation_id`, `user_id`, `room_id`, `fullname`, `email`, `contact`, `check_in`, `check_out`, `guests`, `total_amount`, `status`) VALUES
-(1, 3, 1, 'dave villapando', 'daverusselvillapando667@gmail.com', '09938591534', '2026-11-22', '2026-11-26', 1, 6000.00, 'Pending');
+INSERT INTO `reservations` (`reservation_id`, `user_id`, `room_id`, `fullname`, `email`, `contact`, `check_in`, `check_out`, `guests`, `total_amount`, `extra_fee_total`, `downpayment`, `balance`, `status`) VALUES
+(1, 3, 1, 'dave villapando', 'daverusselvillapando667@gmail.com', '09938591534', '2026-11-22', '2026-11-26', 1, 6000.00, 0.00, 3000.00, 3000.00, 'Pending');
 
 -- --------------------------------------------------------
 
@@ -83,19 +86,27 @@ INSERT INTO `reservations` (`reservation_id`, `user_id`, `room_id`, `fullname`, 
 CREATE TABLE `rooms` (
   `room_id` int(11) NOT NULL,
   `room_name` varchar(100) NOT NULL,
+  `room_type` varchar(50) NOT NULL DEFAULT 'Standard',
   `description` text DEFAULT NULL,
   `price` decimal(10,2) NOT NULL,
-  `capacity` int(11) NOT NULL
+  `base_capacity` int(11) NOT NULL,
+  `max_capacity` int(11) NOT NULL DEFAULT 1,
+  `extra_after` int(11) NOT NULL DEFAULT 0,
+  `extra_fee` decimal(10,2) NOT NULL DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `rooms`
 --
 
-INSERT INTO `rooms` (`room_id`, `room_name`, `description`, `price`, `capacity`) VALUES
-(1, 'Standard Room', 'Comfortable accommodation', 1500.00, 2),
-(2, 'Deluxe Room', 'Spacious deluxe accommodation', 2500.00, 3),
-(3, 'Family Room', 'Accommodation for families', 3500.00, 5);
+INSERT INTO `rooms` (`room_id`, `room_name`, `room_type`, `description`, `price`, `base_capacity`, `max_capacity`, `extra_after`, `extra_fee`) VALUES
+(1, 'Standard Room(A)', 'Standard', 'Cozy room for couples, friends, or small groups', 3500.00, 2, 3, 2, 0.00),
+(2, 'Standard Room(B)', 'Standard', 'Cozy room for couples, friends, or small groups', 3500.00, 2, 3, 2, 0.00),
+(3, 'Standard Room(C)', 'Standard', 'Cozy room for couples, friends, or small groups', 3500.00, 2, 3, 2, 0.00),
+(4, 'Family Room(A)', 'Family', 'Spacious room for families and larger groups', 6000.00, 4, 5, 4, 0.00),
+(5, 'Family Room(B)', 'Family', 'Spacious room for families and larger groups', 6000.00, 4, 5, 4, 0.00),
+(6, 'Family Room(C)', 'Family', 'Spacious room for families and larger groups', 6000.00, 4, 5, 4, 0.00),
+(7, 'Event Hall', 'Event Hall', 'Open-air hall for gatherings and celebrations', 15000.00, 30, 40, 30, 0.00);
 
 -- --------------------------------------------------------
 
@@ -185,7 +196,7 @@ ALTER TABLE `reservations`
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`
